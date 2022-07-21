@@ -8,11 +8,12 @@
 				<view class="avatar mr10">
 					<img :src="avatar" alt="nickname" class="img-1" />
 				</view>
-				<!-- <view class="fs18 fw600" >立即登录</view> -->
-				<view class="nickname fs18 fw600">Topskys</view>
+
+				<view class="nickname fs18 fw600" v-if="$getStorage('token')">Topskys</view>
+				<view class="fs18 fw600" v-else @click="navTo('/pages/login/index')">立即登录</view>
 			</view>
 			<view class="right">
-				<button>账户设置</button>
+				<button type="default" v-if="$getStorage('token')">账户设置</button>
 			</view>
 		</view>
 		<view class="property r-flex-2">
@@ -31,8 +32,11 @@
 				<view class="fs12 color-3">查看我的劵</view>
 			</view>
 		</view>
-		<view class="functions">
-
+		<view class="functions r-flex-3 bgc-2 mg0-16 br10">
+			<view class="function-item c-flex-1 " v-for="(fun,index) in functions" :key="index">
+				<view class="function-icon "><img class='img-2' :src="fun.icon" alt=""></view>
+				<view class="function-txt fs12 color-2">{{fun.txt}}</view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -41,14 +45,46 @@
 	export default {
 		data() {
 			return {
-				avatar: '/static/logo.png'
+				avatar: '/static/logo.png',
+				functions: [{
+						icon: '/static/location.png',
+						txt: '我的地址',
+					},
+					{
+						icon: '/static/customer.png',
+						txt: '我的客服',
+					},
+					{
+						icon: '/static/about.png',
+						txt: '关于饿了么',
+					},
+					{
+						icon: '/static/privacy.png',
+						txt: '用户隐私',
+					},
+					{
+						icon: '/static/attention.png',
+						txt: '规则中心',
+					}
+				]
 			}
+		},
+		methods: {
+			//中间navs跳转页面
+			navTo(url) {
+				uni.navigateTo({
+					url
+				})
+				console.log(url)
+			},
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
 	.center {
+		min-height: calc(100vh - 62.78px);
+
 		.ele {
 			z-index: 999;
 
@@ -74,7 +110,10 @@
 			}
 
 			.right {
-				>button {
+				border-radius: 30.67px;
+				border: none;
+
+				button {
 					width: 5rem;
 					font-size: 0.75rem;
 					border-radius: 30.67px;
@@ -131,6 +170,11 @@
 			}
 
 
+		}
+
+		.function-item {
+			width: 25%;
+			margin-bottom: 0.75rem;
 		}
 	}
 </style>

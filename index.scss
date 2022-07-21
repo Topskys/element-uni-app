@@ -10,6 +10,11 @@
 	align-items: center;
 	justify-content: space-between;
 }
+.r-flex-3{
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
 .c-flex-1{
 	display: flex;
 	flex-direction: column;
@@ -30,21 +35,83 @@
 	padding-bottom: 1.03125rem;
 }
 
+.bgc-2{
+	background-color: #ffffff;
+}
+
+.mg10{
+	margin: 0.625rem;
+}
+
+.mg0-16{
+	margin:0 1rem;
+}
+.mg5-0{
+	margin: 0.3125rem 0;
+}
+.mg10-0{
+	margin: 10px 0;
+}
 	
 .mr10{
 	margin-right: 10px;
 }
-
+.ml10{
+	margin-left: 10px;
+}
+.mt5{
+	margin-top: 5px;
+}
+.pg10{
+	padding: 0.625rem;
+}
+.pg16{
+	padding: 1rem;
+}
+.br10{
+	border-radius: 0.625rem;
+}
+.br50{
+	border-radius: 50%;
+}
 
 .wh46{
 	width: 46px;
 	height: 46px;
 }				    
 
+.img-box36{
+	width: 2.25rem;
+	height: 2.25rem;
+}
+.img-box46{
+	width: 2.875rem;
+	height: 2.875rem;
+}
+.img-box50{
+	width: 3.125rem;
+	height:3.125rem;
+}
+.img-box56{
+	width: 3.5rem;
+	height: 3.5rem;
+}
+img{
+	width: 100%;
+}
 .img-1{
 	display: block;
 	width: 100%;
 	border-radius: 50%;
+}
+.img-2{
+	    width: 1.25rem;
+	    height: 1.25rem;
+	    margin-top: 0.75rem;
+	    background-repeat: no-repeat;
+	    background-position: center;
+	    background-size: contain;
+	    uc-perf-stat-ignore: image;
 }
 
 .fs12{
@@ -52,6 +119,9 @@
 }
 .fs13{
 	font-size: 0.8125rem;
+}
+.fs14{
+	font-size: 0.875rem;
 }
 .fs18{
 	font-size: 1.125rem;
@@ -67,3 +137,8 @@
 .color-3{
 	color: #999999;
 }
+
+.color-4{
+	color: #ffffff;
+}
+

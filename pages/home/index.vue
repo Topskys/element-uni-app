@@ -14,7 +14,9 @@
 				<view class="right">{{tip}}</view>
 			</view>
 		</view>
-
+		<view class="search pg16">
+			<input type="text" maxlength="140" focus placeholder="星巴克  满60减30" />
+		</view>
 	</view>
 </template>
 
@@ -31,6 +33,9 @@
 
 <style lang="scss" scoped>
 	.home-ele {
+		position: fixed;
+		top: 0;
+		left: 0;
 		width: 100%;
 		height: 44px;
 		background-image: linear-gradient(90deg, rgb(41, 202, 255) 0%, rgb(0, 171, 245) 100%);
@@ -38,6 +43,7 @@
 	}
 
 	.ele {
+
 		height: 44px;
 		line-height: 44px;
 		margin-left: 0.75rem;
@@ -48,6 +54,7 @@
 	}
 
 	.home-address {
+		margin-top: 44px;
 		background-image: linear-gradient(90deg, rgb(41, 202, 255) 0%, rgb(0, 171, 245) 100%);
 
 		.address {
