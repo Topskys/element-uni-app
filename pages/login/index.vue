@@ -1,16 +1,17 @@
 <template>
 	<view class="login">
 		<view class="number form-item">
-			<input type="number" focus placeholder="请输入手机号">
+			<input type="text" v-model="user" focus placeholder="请输入手机号">
 		</view>
 		<view class="verify form-item">
-			<view class="r-flex-2">
-				<input type="number" focus placeholder="请输入验证码" />
+			<input type="text" v-model="pwd" placeholder="请输入密码" />
+			<!-- <view class="r-flex-2">
+				
 				<view class="verify-btn br50 ">获取验证码</view>
-			</view>
+			</view> -->
 		</view>
 
-		<view class="login-btn">
+		<view class="login-btn" @click="login()">
 			同意协议并登录
 		</view>
 		<!-- <input type="checkbox" id="fm-agreement-checkbox" autocomplete="off"> -->
@@ -34,6 +35,34 @@
 </template>
 
 <script>
+	export default {
+		data() {
+			return {
+				user: '',
+				pwd: '',
+				url: '/pages/center/index'
+			}
+		},
+		methods: {
+			async login() {
+				console.log("login")
+				var res = await this.$http({
+					url: '/login',
+					method: 'GET',
+					data: {
+						user: this.user || 'Topskys',
+						pwd: this.pwd || 'Topskys',
+					}
+				})
+				this.$setStorage('token', res.info)
+				if (!this.$getStorage('token')) return
+				uni.showToast({
+					title: '登录成功'
+				});
+				uni.navigateBack()
+			}
+		}
+	}
 </script>
 
 <style lang="scss" scoped>

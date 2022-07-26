@@ -39,6 +39,27 @@
 				}
 
 			}
+		}, {
+			"path": "pages/shop/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/shop-detail/index",
+			"style": {
+				"navigationBarTitleText": "商家详情",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/pay/index",
+			"style": {
+				"navigationBarTitleText": "确认订单",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
 	"globalStyle": {

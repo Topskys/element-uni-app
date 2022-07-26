@@ -15,42 +15,72 @@
 			</view>
 		</view>
 		<view class="search mg12 r-flex-2 br16 border-1">
-			<input type="text" maxlength="140" v-model="keyword" focus placeholder="星巴克  满60减30" class="pg2-10 " />
+			<input type="text" maxlength="140" v-model="keyword" placeholder="古茗 | 快乐番薯" class="pg2-10 " />
 			<view class="search-btn  fs14 bgc-3 br16" @click="search()">
 				搜索
 			</view>
 		</view>
+
+
+		<div class='mg10'>
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide " v-for="(item,index) in cates" :key="item.id">
+						<view class="swiper-item ">
+							<!-- <view class="r-flex-1" v-for="(obj,i) in cates.slice(0,8)" :key="i"> -->
+							<view class="selection" align='center'>
+								<p class="img-box56 mg0-auto">
+									<img :src="item.icon" alt="">
+								</p>
+								<p class="color-3 fs14">
+									<span>{{item.title}}</span>
+								</p>
+							</view>
+							<!-- </view> -->
+						</view>
+
+					</div>
+				</div>
+				<!-- 如果需要导航按钮 -->
+				<div class="swiper-button-prev"></div>
+				<div class="swiper-button-next"></div>
+			</div>
+		</div>
+
+
+
 		<view class="recomment-shops r-flex-4 mg18-10-17 fs12 color-3">
 			为你推荐附近的商家
 		</view>
 		<scroll-view scroll-y="true">
-			<!-- v-for="good,i in goods" :key="i" -->
-			<view class="good-list mg18-10-17 bgc-2 br10 ">
-				<view class="good-item r-flex-1">
+
+			<view class="good-list mg5-10-17 bgc-2 br10 " v-for="good,i in shops" :key="i">
+				<view class="good-item r-flex-1 " @click="linkTo(good.id)">
 					<view class="mask img-box104 mg0-10">
-						<img src="/static/hualaishi.jpg" alt="" class='br10'>
+						<img :src="good.image_path" alt="" class='br10'>
 					</view>
 					<view class="intro c-flex-3 mr10" style="flex: 1;">
 						<p class='r-flex-1'>
-							<view class="img-box34-14 mr10">
+							<view class="img-box34-14 mr10" v-if="good.license.business_license_image">
 								<img src="/static/advertisement.png" alt="">
 							</view>
 							<view class="shop-name over fs16" style="flex: 1;font-weight: bold;">
-								华莱士·全鸡汉堡...
+								{{good.name}}
 							</view>
 						</p>
 						<p class='r-flex-2'>
 							<view class="score">
-								<span class='color-5 fs12'>4.6分</span><span class='color-7 fs12 ml10'>月售900+</span>
+								<span class='color-5 fs12'>{{good.rating}}分</span><span
+									class='color-7 fs12 ml10'>月售{{good.rating_count}}</span>
 							</view>
 							<view class="distance color-6 fs12">
-								<span>30分钟</span><span class='ml10'>674m</span>
+								<span>{{good.order_lead_time}}</span><span class='ml10'>{{good.distance}}</span>
 							</view>
 						</p>
 						<p class='fs12 color-6'>
-							<span>起送￥15</span><span class='ml10 color-7'>免配送费</span>
+							<span>起送￥15</span><span class='ml10 color-7'>{{good.piecewise_agent_fee.tips}}</span>
 						</p>
-						<p class='fs10 '><span class='bgc-5 color-8 pg0-6 br4'>"薯条新鲜薯脆，好好吃"</span></p>
+						<p class='fs10 '><span class='bgc-5 color-8 pg0-6 br4'>{{good.promotion_info}}</span></p>
 						<p class='fs12 color-2'><span class='color-9 br4 bgc-5'>30减17</span><span
 								class='color-9 br4 pg0-6 bgc-5 ml10'>45减25</span>
 							<!-- <span class='color-9'>V</span> -->
@@ -63,20 +93,63 @@
 </template>
 
 <script>
+	import Swiper from "swiper";
+	import "@/node_modules/swiper/swiper.min.css";
 	export default {
 		data() {
 			return {
-				location: '定位获取失败',
+				location: '洪甘路金帝天澜',
 				tip: '美食果蔬医药·30分钟送达',
 				keyword: '',
-				goods: [],
+				shops: [],
+
+				cates: [],
+
 			}
+		},
+		updated() {
+			new Swiper(".swiper-container", {
+				// loop: true, // 循环模式选项
+				// 如果需要前进后退按钮
+				navigation: {
+					nextEl: ".swiper-button-next",
+					prevEl: ".swiper-button-prev",
+				},
+				slidesPerView: 4, // 显示几个
+				height: 150, // swiperlide 高度
+			});
+		},
+		onLoad() {
+			this.getCategoryList();
+			this.getShopList();
+		},
+		onPullDownRefresh() {
+			window.location.reload()
+			uni.stopPullDownRefresh()
 		},
 		methods: {
 			search() {
 				this.keyword = ''
+			},
+			async getCategoryList() {
+				let res = await this.$http({
+					url: '/catelist'
+				})
+				this.cates = res.list.slice(0, 8)
+			},
+			async getShopList() {
+				var res = await this.$http({
+					url: '/shoplist',
+				})
+				this.shops = res.list
+			},
+			linkTo(id) {
+				uni.navigateTo({
+					url: `/pages/shop-detail/index?id=${id}`
+				})
 			}
-		}
+		},
+
 	}
 </script>
 

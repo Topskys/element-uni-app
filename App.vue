@@ -18,6 +18,10 @@
 		color: #191919;
 	}
 
+	html {
+		font-size: 16px;
+	}
+
 	// 公共样式
 	@import './index.scss';
 	// vant的css

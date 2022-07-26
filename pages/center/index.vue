@@ -1,7 +1,7 @@
 <template>
 	<view class="center bgc-1">
-		<view class="ele opacity1" style="height:44px;">
-			<view class="ele-txt">饿了么</view>
+		<view class="ele " style="height:44px;">
+			<view class="ele-txt ">饿了么</view>
 		</view>
 		<view class="account r-flex-2">
 			<view class="left r-flex-1">
@@ -9,7 +9,7 @@
 					<img :src="avatar" alt="nickname" class="img-1" />
 				</view>
 
-				<view class="nickname fs18 fw600" v-if="$getStorage('token')">Topskys</view>
+				<view class="nickname fs18 fw600" v-if="$getStorage('token')">{{$getStorage('token').account}}</view>
 				<view class="fs18 fw600" v-else @click="navTo('/pages/login/index')">立即登录</view>
 			</view>
 			<view class="right">
@@ -69,13 +69,15 @@
 				]
 			}
 		},
+		// mounted() {
+		// 	window.location.reload()
+		// },
 		methods: {
 			//中间navs跳转页面
 			navTo(url) {
 				uni.navigateTo({
 					url
 				})
-				console.log(url)
 			},
 		}
 	}

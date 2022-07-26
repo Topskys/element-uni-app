@@ -20,6 +20,15 @@
 	justify-content: space-around;
 	align-items: center;
 }
+.r-flex-5{
+	display: flex;
+	justify-content: space-between;
+}
+.r-flex-6{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
 .c-flex-1{
 	display: flex;
 	flex-direction: column;
@@ -58,13 +67,32 @@
 	border: 1px solid #f56105;
 	    background-color: #fef0e5;
 }
+.bgc-6{
+	background-color: lightgoldenrodyellow;
+}
+//石榴红
+.bgc-7{
+	background-color: #f20c00;
+}
+//赤红//#ab1d22胭脂
+.bgc-8{
+	background-color: #C32A2C;
+}
+.bgc-9{
+	background-color: rgb(153, 153, 153);;
+}
 // $border-color:#7fd2ff;
-
+.mg0-auto{
+	margin: 0 auto;
+}
 .mg10{
 	margin: 0.625rem;
 }
 .mg0-10{
 	margin: 0 0.625rem;
+}
+.mg0-5{
+	margin: 0 0.3125rem;
 }
 .mg0-16{
 	margin:0 1rem;
@@ -85,14 +113,23 @@
 .mg18-10-17{
 	margin: 1.125rem 0.6875rem 1.0625rem;
 }
+.mg5-10-17{
+	margin: 0.3125rem 0.6875rem 1.0625rem;
+}
+.ml5{
+	margin-left: 0.3125rem;
+}
+.mr5{
+	margin-right: 0.3125rem;
+}
 .mr10{
-	margin-right: 10px;
+	margin-right: 0.625rem;
 }
 .ml10{
-	margin-left: 10px;
+	margin-left: 0.625rem;
 }
 .mt5{
-	margin-top: 5px;
+	margin-top: 0.3125rem;
 }
 .pg2-10{
 	padding: 0.125rem 0.625rem;
@@ -113,6 +150,18 @@
 .pg5-0{
 	padding: 0.3125rem 0;
 }
+.pg5-12{
+	padding: 0.3125rem 0.75rem;
+}
+.pg0-5{
+	padding: 0  .3125rem ;
+}
+.pg10-50 {
+	padding: 0.625rem 3.125rem;
+}
+.pg10-20 {
+	padding: 0.625rem 1.25rem;
+}
 .br4{
 	    // position: relative;
 	    // width: max-content;
@@ -129,6 +178,7 @@
 	    border-radius: 0.25rem;
 }
 .over{
+	display: block;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -165,10 +215,14 @@
 .img-box50{
 	width: 3.125rem;
 	height:3.125rem;
+	border-radius: 0.625rem;
 }
 .img-box56{
 	width: 3.5rem;
 	height: 3.5rem;
+	background-position: center center;
+	background-size: cover;
+	object-fit: cover;
 }
 .img-box104{
 	
@@ -197,8 +251,13 @@ img{
 	    background-size: contain;
 	    uc-perf-stat-ignore: image;
 }
+
+.img-12{
+	width: 0.75rem;
+	// height: 0.6875rem;
+}
 .fs10{
-	font-size: 0.0625rem;
+	font-size: 0.625rem;
 }
 .fs12{
 	font-size: 0.75rem;
@@ -209,16 +268,24 @@ img{
 .fs14{
 	font-size: 0.875rem;
 }
-.fs18{
+.fs16{
 	font-size: 1rem;
 } 
 .fs18{
 	font-size: 1.125rem;
 } 
+.fs20{
+	font-size: 1.25rem;
+} 
+.fwbold{
+	font-weight: bold;
+}
 .fw600{
 	font-weight: 600;
 }
-
+.color-1{
+	color: #000;
+}
 .color-2{
 	color: #191919;
 }
@@ -246,6 +313,25 @@ img{
 	    color: rgb(255, 75, 51);
 	    border-color: rgb(255, 201, 193);
 }
+.color-10{
+	color: #02b6fd;
+}
+.color-11{
+	color: #333;
+}
+.color-12{
+	color: rgb(139, 81, 30);
+}
+.color-13{
+	color: rgb(255, 75, 51);
+}
 .border-1{
 	border: 1px solid #02b6fd;
+}
+.border-2{
+	border: 1px solid #f56105;
+}
+
+.text-line-through{
+	text-decoration: line-through;
 }
