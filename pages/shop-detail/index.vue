@@ -1,5 +1,5 @@
 <template>
-	<scroll-view scroll-y="true">
+	<scroll-view scroll-y="true" style="height: 100%;">
 		<view>
 			<view class="shop-name-img bgc-2">
 				<view class="shop-img">
@@ -10,7 +10,7 @@
 						<view>
 							<view class="shop-name r-flex-1 fs20 fwbold color-1">
 								<view class='name over'>{{shopDetail.name}}</view>
-								<view class="arrow-right fs14 ml5"></view>
+								<view class="arrow arrow-right fs14 ml5"></view>
 							</view>
 							<view style="margin-top: 1.33vw;">
 								<span class='color-5 fs12'>{{shopDetail.score}}</span>
@@ -56,24 +56,26 @@
 				<view class="tab mg0-16 pg5-0">评价</view>
 				<view class="tab pg5-0">商家</view>
 			</view>
-			<view class="sort-goods r-flex-2">
+			<view class="sort-goods r-flex-1">
 				<scroll-view scroll-y="true" class="left">
 					<view v-for="(cate,idx) in goodCates" :key="cate.id" :class="active===idx?'active':''"
 						@click="selectCate(idx,cate.id)">{{cate.title}}</view>
 				</scroll-view>
-				<scroll-view scroll-y="true" class="right">
-					<view class="item r-flex-1" v-for="good,i in goods" :key="i">
+				<scroll-view scroll-y="true" class="right mg0-auto">
+					<view class="item r-flex-1 " v-for="good,i in goods" :key="i">
 						<view class="img-box104 mr10">
 							<image :src="good.img" @click="previewImg(good.img)"></image>
 						</view>
-						<view class="intro">
-							<p class='over'>{{good.title}}</p>
-							<p class='over fs12 color-3'>{{good.tips}}</p>
-							<p class='over fs12 color-3'>{{good.sell}}</p>
-							<p class='r-flex-2'>
+						<view class="intro c-flex-4">
+							<view>
+								<p class='over'>{{good.title}}</p>
+								<p class='over fs12 color-3'>{{good.tips}}</p>
+								<p class='over fs12 color-3'>{{good.sell}}</p>
+							</view>
+							<view class='r-flex-2 mt16'>
 								<view class="price color-9"><span class='fs10'>￥</span>{{good.price}}</view>
 								<view class="add br50 bgc-3 color-4" @click='add(good)'>+</view>
-							</p>
+							</view>
 						</view>
 					</view>
 					<text v-if="goods.length===0">暂无数据</text>
@@ -114,6 +116,8 @@
 				total_stuff: 0,
 				total_price: 0,
 				buy_tip: '',
+				good: {},
+				title: '',
 			}
 		},
 		components: {
@@ -170,15 +174,18 @@
 			add(good) {
 				this.total_stuff += 1;
 				this.total_price += good.price;
-				this.total_price = Math.floor(this.total_price)
+				this.total_price = Math.floor(this.total_price * 100) / 100
 				this.buy_tip = '优惠明细 '
+				this.good = good
+				this.title = good.title
 			},
 			toBuy() {
 				var num = this.total_stuff
 				var price = this.total_price
+				var title = this.title
 				if (this.$getStorage('token')) {
 					uni.navigateTo({
-						url: `/pages/pay/index?price=${price}&num=${num}`,
+						url: `/pages/pay/index?title=${title}&price=${price}&num=${num}&img=${this.good.img}&shop_name=${this.shopDetail.name}&shop_img=${this.shopDetail.img}`,
 					})
 				} else {
 					uni.navigateTo({
@@ -192,8 +199,48 @@
 </script>
 
 <style lang="scss" scoped>
+	.shop-name-img {
+		position: relative;
+		height: 12.5rem;
+		// background-color: aqua;
+
+		.shop-img {
+			width: 100%;
+			height: 7.5rem;
+
+			img {
+				width: 100%;
+				height: 100%;
+				background-position: center;
+				background-size: cover;
+				object-fit: fill;
+
+			}
+		}
+
+		.uni-card {
+			position: absolute;
+			top: 10%;
+			left: 0;
+			right: 0;
+			width: inherit;
+			padding: 0 !important;
+			margin: auto 3.2vw !important;
+
+			.basic {
+				margin-top: 1.8667vw;
+
+				.shop-name {
+					max-width: 67.3333vw;
+
+				}
+			}
+		}
+	}
+
+
 	.sort-goods {
-		height: calc(100vh - 47px);
+		height: calc(100vh - 20.2rem);
 
 		.left {
 			width: 200rpx;
@@ -220,7 +267,7 @@
 
 		.right {
 			width: 520rpx;
-			width: 100%;
+			// width: 100%;
 			height: 100%;
 			// background-color: #eee;
 			box-sizing: border-box;
@@ -257,73 +304,12 @@
 					color: #333;
 					font-size: 30rpx;
 					line-height: 60rpx;
+					text-align: center;
 					padding: 0 15rpx;
 				}
 			}
 		}
 
-	}
-
-	.shop-name-img {
-		position: relative;
-		height: 200px;
-		// background-color: aqua;
-
-		.shop-img {
-			width: 100%;
-			height: 120px;
-
-			img {
-				width: 100%;
-				height: 100%;
-				background-position: center;
-				background-size: cover;
-				object-fit: fill;
-
-			}
-		}
-
-		.uni-card {
-			position: absolute;
-			top: 10%;
-			left: 0;
-			right: 0;
-			width: inherit;
-			padding: 0 !important;
-			margin: auto 3.2vw !important;
-
-			.basic {
-				margin-top: 1.8667vw;
-
-				.shop-name {
-					max-width: 67.3333vw;
-
-					.arrow-right {
-						background-image: url('@/static/arrow.png');
-						background-position: center;
-						background-size: cover;
-						width: 1rem;
-						height: 1rem;
-						// 顺时针旋转
-						-webkit-transform: rotate(90deg);
-						/* Safari and Chrome */
-						-moz-transform: rotate(90deg);
-						/* Firefox */
-						-ms-transform: rotate(90deg);
-						/* IE 9 */
-						-o-transform: rotate(90deg);
-						/* Opera */
-						transform: rotate(90deg);
-					}
-				}
-			}
-		}
-	}
-
-
-	.sort-goods {
-		height: calc(100vh -14.5375rem);
-		// background-color: beige;
 	}
 
 	.buy {

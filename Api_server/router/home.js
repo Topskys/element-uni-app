@@ -28,8 +28,12 @@ router.get('/goodcates', homeHandler.goodCateList)
 router.get('/good', homeHandler.goodInfo)
 
 
+// 支付
+router.get('/pay',homeHandler.pay)
 
 
+// 获取订单信息
+router.get('/order',homeHandler.orderInfo)
 
 
 

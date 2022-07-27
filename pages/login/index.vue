@@ -56,9 +56,9 @@
 				})
 				this.$setStorage('token', res.info)
 				if (!this.$getStorage('token')) return
-				uni.showToast({
-					title: '登录成功'
-				});
+				// uni.showToast({
+				// 	title: '登录成功'
+				// });
 				uni.navigateBack()
 			}
 		}

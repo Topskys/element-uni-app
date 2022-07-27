@@ -12,38 +12,37 @@
 		</view>
 
 		<!-- v-if="$getStorage('token')" -->
-		<view class="order-item bgc-2 pg10 br10" v-for="(order,i) in orders" :key="i">
+		<view class="order-item bgc-2 pg10 br10" >
 			<view class="title r-flex-2">
 				<view class="shop r-flex-1">
 					<view class="shop-img img-box36 mr10">
-						<img :src="order.img" class='br10'>
+						<img :src="order.shop_img" class='br5'>
 					</view>
-					<view class="shop-name" @click="navTo('/pages/order-detail')">
-						{{order.name}}<i class="fa fa-chevron-right fs14 ml10" style="color: #bbb;"></i>
+					<view class="shop-name over" @click="navTo('/pages/order-detail')">
+						{{order.shop_name}}<i class="fa fa-chevron-right fs14 ml5" style="color: #bbb;"></i>
 					</view>
 				</view>
 				<view class="status fs14" style="color: #999; ">
-					{{order.status}}
+					{{order.order_status}}
 				</view>
 			</view>
 			<view class="tip mg5-0">
 				<span class="tip-txt">{{order.rest}}</span>
 			</view>
 			<view class="imgs r-flex-2 mg10-0">
-				<view class="img-list r-flex-1">
+				<view class="img-list r-flex-1 ">
 					<!-- <view class="img-item img-box56 " v-for="item,i in imgs" :key="i"> -->
-					<img :src="item.img" alt="" v-for="item,i in order.vegetable" :key="i" class="mr10">
+					<img :src="item.img" alt="" v-for="item,i in order.imgs" :key="i" class=" img-box56 br5" :class="l<2?'mr10':''">
 					<!-- </view> -->
+					<span v-if="l<2" class='fs14'>{{order.name}}</span>
 				</view>
-				<view class="price" align='center'>
+				<view class="price pg0-10" align='center'>
 					<p><span class="fs12">￥</span>{{order.price}}</p>
-					<p class="fs12 color-3 mt5">共{{order.total}}件</p>
+					<p class="fs12 color-3 mt5">共{{order.num}}件</p>
 				</view>
 			</view>
 		</view>
-		<!-- <view align='center' v-else>
-			请先登录
-		</view> -->
+		
 	</view>
 </template>
 
@@ -68,45 +67,25 @@
 						path: '退款'
 					}
 				],
-				orders: [{
-					name: '果然不同',
-					img: '/static/pig.jpg',
-					vegetable: [{
-							img: '/static/logo.png'
-						}, {
-							img: '/static/logo.png'
-						}, {
-							img: '/static/logo.png'
-						},
-						{
-							img: '/static/logo.png'
-						},
-						{
-							img: '/static/logo.png'
-						},
-						{
-							img: '/static/logo.png'
-						},
-						{
-							img: '/static/logo.png'
-						},
-					],
-
-					status: '已送达',
-					rest: '本店已休息',
-					price: '8.88',
-					total: '2',
-				}]
+				order: {},
+				l:0,
 			}
 		},
 		onLoad() {
 			this.$getStorage('token') ? '' : location.href = '/#/pages/login/index'
+			this.getOrder()
 		},
 		methods: {
 			navTo(url) {
 				uni.navTo(url)
 			},
-
+			async getOrder(){
+				let res =await this.$http({
+					url:`/order`//?token=${this.$getStorage('token').account }
+				})
+				this.order=res.order
+				this.l=this.order.imgs.length
+			} 
 		}
 	}
 </script>
@@ -195,3 +174,28 @@
 		}
 	}
 </style>
+
+
+<!-- orders: [{
+					name: '果然不同',
+					img: '/static/pig.jpg',
+					vegetable: [{
+							img: '/static/logo.png'
+						}, {
+							img: '/static/logo.png'
+						}, {
+							img: '/static/logo.png'
+						},
+						{
+							img: '/static/logo.png'
+						},
+						{
+							img: '/static/logo.png'
+						},
+						{
+							img: '/static/logo.png'
+						},
+						{
+							img: '/static/logo.png'
+						},
+					], -->

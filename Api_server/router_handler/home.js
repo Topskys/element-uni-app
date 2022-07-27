@@ -4,14 +4,14 @@ exports.login = (req, res) => {
 	console.log("Hello",new Date())
 	const account=req.query.user;
 	const pwd=req.query.pwd;
-	if(account==pwd){
+	if(account===pwd){
 		res.send({
 			status: 200,
 			info:{
 				account: account,
 				nickname:'罗先生',
 				phone:1868086428,
-				address:"",
+				address:"福州软件园大道89号2",
 				age:18,
 			}
 		})
@@ -237,7 +237,7 @@ exports.shopList= (req, res) => {
 "__v": 0
 },
 {
-"name": "串烧",
+"name": "串烧 招牌秘制小龙虾不错的,下次还点",
 "address": "湖南省长沙市岳麓区茶子山路19号(政府对面长郡中学西侧)",
 "id": 3,
 "latitude": 39.044098,
@@ -343,6 +343,261 @@ exports.shopList= (req, res) => {
 ],
 "__v": 0
 },
+{
+		
+	"name": "华莱士",
+	"address": "广东省广州市越秀区中山五路219号华联购物中心F1",
+	"id": 4,
+	"latitude": 23.12497,
+	"longitude": 113.26308,
+	"location": [
+	113.26308,
+	23.12497
+	],
+	"phone": "13437850035",
+	"category": "快餐便当/简餐",
+	"supports": [],
+	"status": 1,
+	"recent_order_num": 106,
+	"rating_count": 961,
+	"rating": 4.7,
+	"promotion_info": "热情掌柜",
+	"piecewise_agent_fee": {
+	"tips": "配送费约¥5"
+	},
+	"opening_hours": [
+	"8:30/20:30"
+	],
+	"license": {
+	"catering_service_license_image": "https://gw.alicdn.com/tfs/TB1HmQ0bODsXe8jSZR0XXXK6FXa-68-36.png",
+	"business_license_image": "https://gw.alicdn.com/tfs/TB1HmQ0bODsXe8jSZR0XXXK6FXa-68-36.png"
+	},
+	"is_new": true,
+	"is_premium": true,
+	"image_path": "https://img.alicdn.com/imgextra/i1/2201077674987/O1CN01oyWJmp1mi5vFM47bj_!!2201077674987-0-koubei.jpg_400x400Q85s50.jpg_.webp",
+	"identification": {
+	"registered_number": "",
+	"registered_address": "",
+	"operation_period": "",
+	"licenses_scope": "",
+	"licenses_number": "",
+	"licenses_date": "",
+	"legal_person": "",
+	"identificate_date": null,
+	"identificate_agency": "",
+	"company_name": ""
+	},
+	"float_minimum_order_amount": 20,
+	"float_delivery_fee": 5,
+	"distance": "10公里",
+	"order_lead_time": "40分钟",
+	"description": "sad",
+	"delivery_mode": {
+	"color": "57A9FF",
+	"id": 1,
+	"is_solid": true,
+	"text": "蜂鸟专送"
+	},
+	"activities": [],
+	"__v": 0
+	},{
+	"name": "塔斯汀",
+	"address": "上海市浦东新区中科",
+	"id": 5,
+	"latitude": 34.563215,
+	"longitude": 113.888708,
+	"location": [
+	113.76077,
+	34.73822
+	],
+	"phone": "11526161616",
+	"category": "快餐便当",
+	"supports": [
+	{
+	"description": "已加入“外卖保”计划，食品安全有保障",
+	"icon_color": "999999",
+	"icon_name": "保",
+	"id": 7,
+	"name": "外卖保",
+	"_id": "5bfc9a30d51a913e8655d397"
+	},
+	{
+	"description": "准时必达，超时秒赔",
+	"icon_color": "57A9FF",
+	"icon_name": "准",
+	"id": 9,
+	"name": "准时达",
+	"_id": "5bfc9a30d51a913e8655d396"
+	},
+	{
+	"description": "该商家支持开发票，请在下单时填写好发票抬头",
+	"icon_color": "999999",
+	"icon_name": "票",
+	"id": 4,
+	"name": "开发票",
+	"_id": "5bfc9a30d51a913e8655d395"
+	}
+	],
+	"status": 0,
+	"recent_order_num": 100,
+	"rating_count": 218,
+	"rating": 5,
+	"promotion_info": "“分量很足,非常好吃,干净卫生”",
+	"piecewise_agent_fee": {
+	"tips": "配送费约¥5"
+	},
+	"opening_hours": [
+	"06:30/09:00"
+	],
+	"license": {
+	"catering_service_license_image": "",
+	"business_license_image": "https://gw.alicdn.com/tfs/TB1HmQ0bODsXe8jSZR0XXXK6FXa-68-36.png"
+	},
+	"is_new": true,
+	"is_premium": true,
+	"image_path": "https://img.alicdn.com/imgextra/i4/2214299659589/O1CN012x0v3A2Khoe4kcFrv_!!2214299659589-2-koubei.png_400x400Q85s50.jpg_.webp",
+	"identification": {
+	"registered_number": "",
+	"registered_address": "",
+	"operation_period": "",
+	"licenses_scope": "",
+	"licenses_number": "",
+	"licenses_date": "",
+	"legal_person": "",
+	"identificate_date": null,
+	"identificate_agency": "",
+	"company_name": ""
+	},
+	"float_minimum_order_amount": 20,
+	"float_delivery_fee": 5,
+	"distance": "10公里",
+	"order_lead_time": "40分钟",
+	"description": "cvvv452se",
+	"delivery_mode": {
+	"color": "57A9FF",
+	"id": 1,
+	"is_solid": true,
+	"text": "蜂鸟专送"
+	},
+	"activities": [
+	{
+	"icon_name": "减",
+	"name": "满减优惠",
+	"description": "满30减5，满60减8",
+	"icon_color": "f07373",
+	"id": 1,
+	"_id": "5bfc9a30d51a913e8655d398"
+	}
+	],
+	"__v": 0
+	},
+	{
+	"name": "串烧",
+	"address": "湖南省长沙市岳麓区茶子山路19号(政府对面长郡中学西侧)",
+	"id": 6,
+	"latitude": 39.044098,
+	"longitude": 121.749497,
+	"location": [
+	113.156124,
+	23.46175
+	],
+	"phone": "121345678900",
+	"category": "快餐便当",
+	"supports": [
+	{
+	"description": "已加入“外卖保”计划，食品安全有保障",
+	"icon_color": "999999",
+	"icon_name": "保",
+	"id": 7,
+	"name": "外卖保",
+	"_id": "5bfd051cd51a913e8655d827"
+	},
+	{
+	"description": "准时必达，超时秒赔",
+	"icon_color": "57A9FF",
+	"icon_name": "准",
+	"id": 9,
+	"name": "准时达",
+	"_id": "5bfd051cd51a913e8655d826"
+	},
+	{
+	"description": "该商家支持开发票，请在下单时填写好发票抬头",
+	"icon_color": "999999",
+	"icon_name": "票",
+	"id": 4,
+	"name": "开发票",
+	"_id": "5bfd051cd51a913e8655d825"
+	}
+	],
+	"status": 1,
+	"recent_order_num": 54,
+	"rating_count": 670,
+	"rating": 4.3,
+	"promotion_info": "招牌秘制小龙虾不错的,下次还点",
+	"piecewise_agent_fee": {
+	"tips": "配送费约¥5"
+	},
+	"opening_hours": [
+	"8:30/20:30"
+	],
+	"license": {
+	"catering_service_license_image": "https://gw.alicdn.com/tfs/TB1HmQ0bODsXe8jSZR0XXXK6FXa-68-36.png",
+	"business_license_image": "https://gw.alicdn.com/tfs/TB1HmQ0bODsXe8jSZR0XXXK6FXa-68-36.png"
+	},
+	"is_new": true,
+	"is_premium": true,
+	"image_path": "https://img.alicdn.com/imgextra/i1/2208276648981/O1CN01wLxmz02GDLpLANpx6_!!2208276648981-0-koubei.jpg_400x400Q85s50.jpg_.webp",
+	"identification": {
+	"registered_number": "",
+	"registered_address": "",
+	"operation_period": "",
+	"licenses_scope": "",
+	"licenses_number": "",
+	"licenses_date": "",
+	"legal_person": "",
+	"identificate_date": null,
+	"identificate_agency": "",
+	"company_name": ""
+	},
+	"float_minimum_order_amount": 20,
+	"float_delivery_fee": 5,
+	"distance": "10公里",
+	"order_lead_time": "40分钟",
+	"description": "互惠1",
+	"delivery_mode": {
+	"color": "57A9FF",
+	"id": 1,
+	"is_solid": true,
+	"text": "蜂鸟专送"
+	},
+	"activities": [
+	{
+	"icon_name": "特",
+	"name": "优惠大酬宾",
+	"description": "111",
+	"icon_color": "EDC123",
+	"id": 1,
+	"_id": "5bfd051cd51a913e8655d82a"
+	},
+	{
+	"icon_name": "新",
+	"name": "新用户立减",
+	"description": "2123",
+	"icon_color": "70bc46",
+	"id": 2,
+	"_id": "5bfd051cd51a913e8655d829"
+	},
+	{
+	"icon_name": "领",
+	"name": "进店领券",
+	"description": "23123",
+	"icon_color": "E3EE0D",
+	"id": 3,
+	"_id": "5bfd051cd51a913e8655d828"
+	}
+	],
+	"__v": 0
+	},
 ]})
 }
 
@@ -624,6 +879,74 @@ exports.goodInfo= (req, res) => {
 	]})
 	}
 }
+
+var price=""
+var num =""
+var title=""
+var img=""
+var shop_img=""
+var shop_name=""
+var token=""
+// 获取支付信息
+exports.pay=(req,res)=>{
+	price=req.query.price
+ 	num =req.query.num
+	title=req.query.title
+	img=req.query.img
+	shop_img=req.query.shop_img
+	shop_name=req.query.shop_name
+	token=req.query.token
+	console.log(price,num,title,img,shop_img,shop_name,token)
+	if(price&&num&&title&&img&&shop_img&&shop_name&&token){
+		res.send({
+			status:200,
+			pay:{
+				pay_token:Math.random()*9999,
+				pay_status:'支付成功',
+				pay_time:new Date(),
+			}
+		})
+	}else{
+		res.send({
+			status:200,
+			pay:{
+				pay_token:"",
+				pay_status:'支付失败',
+				pay_time:new Date(),
+			}
+		})
+	}
+}
+
+
+
+// 获取订单信息
+exports.orderInfo=(req,res)=>{
+	let account=req.query.token
+	if(!account){
+		res.send({
+			status:200,
+			order:{
+				price:price,
+				num:num,
+				name:title,
+				imgs:[
+					{
+						img:img
+					}
+				],
+				shop_img:shop_img,
+				shop_name:shop_name,
+				token:token,
+				rest:'營業中',
+				order_status:"配送中",
+			}
+		})
+	}
+}
+
+
+
 
 
 // 获取轮播图处理函数
