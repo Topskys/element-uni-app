@@ -20,6 +20,16 @@
 
 		},
 		{
+			"path": "pages/order-detail/index",
+			"style": {
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+
+		},
+		{
 			"path": "pages/center/index",
 			"style": {
 				"enablePullDownRefresh": false,

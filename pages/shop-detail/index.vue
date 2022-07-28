@@ -51,38 +51,41 @@
 
 				</uni-card>
 			</view>
-			<view class="tabs r-flex-3 color-2 bgc-2 mg0-10">
-				<view class="tab  pg5-0">全部商品</view>
-				<view class="tab mg0-16 pg5-0">评价</view>
-				<view class="tab pg5-0">商家</view>
-			</view>
-			<view class="sort-goods r-flex-1">
-				<scroll-view scroll-y="true" class="left">
-					<view v-for="(cate,idx) in goodCates" :key="cate.id" :class="active===idx?'active':''"
-						@click="selectCate(idx,cate.id)">{{cate.title}}</view>
-				</scroll-view>
-				<scroll-view scroll-y="true" class="right mg0-auto">
-					<view class="item r-flex-1 " v-for="good,i in goods" :key="i">
-						<view class="img-box104 mr10">
-							<image :src="good.img" @click="previewImg(good.img)"></image>
-						</view>
-						<view class="intro c-flex-4">
-							<view>
-								<p class='over'>{{good.title}}</p>
-								<p class='over fs12 color-3'>{{good.tips}}</p>
-								<p class='over fs12 color-3'>{{good.sell}}</p>
+		</view>
+		<!-- tabs -->
+		<uni-segmented-control :current="current" :values="items" @clickItem="onClickItem" styleType="button"
+			activeColor="#000"></uni-segmented-control>
+		<view class="content">
+			<view v-show="current === 0">
+				<!-- 商家商品分类 -->
+				<view class="sort-goods r-flex-1">
+					<scroll-view scroll-y="true" class="left">
+						<view v-for="(cate,idx) in goodCates" :key="cate.id" :class="active===idx?'active':''"
+							@click="selectCate(idx,cate.id)">{{cate.title}}</view>
+					</scroll-view>
+					<scroll-view scroll-y="true" class="right mg0-auto">
+						<view class="item r-flex-1 " v-for="good,i in goods" :key="i">
+							<view class="img-box104 mr10">
+								<image :src="good.img" @click="previewImg(good.img)"></image>
 							</view>
-							<view class='r-flex-2 mt16'>
-								<view class="price color-9"><span class='fs10'>￥</span>{{good.price}}</view>
-								<view class="add br50 bgc-3 color-4" @click='add(good)'>+</view>
+							<view class="intro c-flex-4">
+								<view>
+									<p class='over'>{{good.title}}</p>
+									<p class='over fs12 color-3'>{{good.tips}}</p>
+									<p class='over fs12 color-3'>{{good.sell}}</p>
+								</view>
+								<view class='r-flex-2 mt16'>
+									<view class="price color-9"><span class='fs10'>￥</span>{{good.price}}</view>
+									<view class="add br50 bgc-3 color-4" @click='add(good)'>+</view>
+								</view>
 							</view>
 						</view>
-					</view>
-					<text v-if="goods.length===0">暂无数据</text>
-				</scroll-view>
+						<text v-if="goods.length===0">暂无数据</text>
+					</scroll-view>
+				</view>
 			</view>
 			<!-- 购买导航栏 -->
-			<view class="buy bgc-2 r-flex-2">
+			<view class="buy bgc-2 r-flex-2" v-show="current==0">
 				<view class="left r-flex-1">
 					<view class="img-box36 ele-basket">
 						<img src="/static/basket.png" alt="">
@@ -100,12 +103,72 @@
 				</view>
 			</view>
 		</view>
+		<view v-show="current === 1">
+			<view class="comment color-15 mg10" align='center'>
+				暂无评价
+			</view>
+		</view>
+		<view v-show="current === 2">
+			<view class="shop-intro">
+				<uni-card style='pg10'>
+					<view class="mg10-0">
+						<view class="r-flex-2">
+							<view class="left">
+								<p class="fs14 fwbold  mw282 over color-1">{{shopDetail.name}}</p>
+								<p class='addrres over mw282'>{{shopDetail.address}}</p>
+							</view>
+							<view class="right img-box24 mg12 " @click="showDrawer">
+								<img src="/static/contact.png" class=" border-l pg12">
+							</view>
+						</view>
+						<uni-drawer ref="showLeft" mode="left" :mask-click="false">
+							<view class="phone mg10 color-1 fs14" align='center' @click="closeDrawer">
+								{{shopDetail.phone}}
+							</view>
+						</uni-drawer>
+					</view>
+					<view class="shop-info">
+						<p class="fs14 fwbold color-1  mg5-0 ">商家信息</p>
+						<p class="fs12 over mw282 color-1 mg5-0">商家品类：{{shopDetail.type}}</p>
+						<p class='fs12 over mw282 color-1 mg5-0'>营业时间：{{shopDetail.work_time}}</p>
+					</view>
+					<view class='color-15 intelligent-btn border-3 br100 ' align='center' @click="checkIntelligent">
+						查看营业资质
+					</view>
+				</uni-card>
+				<uni-card class='pg10 uni-card-3'>
+					<p class='fs14 fwbold color-1 mg5-0'>商家服务</p>
+					<view class="r-flex-7 mg5-0">
+						<view>
+							<span class="color-15 border-3 br4 pg0 fs12">融化必赔</span>
+						</view>
+						<view class="fs12 color-15">
+							购买指定冰品冷饮或冷蔵饮料，满足相应条件时，可享受红包赔付。
+						</view>
+					</view>
+					<view class="r-flex-7 mg5-0">
+						<view>
+							<span class="color-15 border-3 br4 pg0 fs12">支持预订</span>
+						</view>
+						<view class="fs12 color-15">
+							商户支持提前预定服务，您可自行选择期望的送达时间
+						</view>
+					</view>
+
+				</uni-card>
+				<uni-card align='center'>
+					<view class='color-15 fs14' @click="complain">举报商家</view>
+				</uni-card>
+			</view>
+		</view>
+		</view>
 	</scroll-view>
 </template>
 
 <script>
 	import uniCard from '@/uni_modules/uni-card/components/uni-card/uni-card'
-
+	import uniSegmentedControl from '@/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control'
+	import uniDrawer from '@/uni_modules/uni-drawer/components/uni-drawer/uni-drawer'
 	export default {
 		data() {
 			return {
@@ -118,10 +181,14 @@
 				buy_tip: '',
 				good: {},
 				title: '',
+				items: ['全部商品', '评价', '商家'],
+				current: 0,
 			}
 		},
 		components: {
 			uniCard,
+			uniSegmentedControl,
+			uniDrawer,
 		},
 		onLoad: function(option) {
 			// 接收home的商店id路由参数
@@ -130,6 +197,13 @@
 			this.getGoodCates()
 		},
 		methods: {
+			// tab选中的回调
+			onClickItem(e) {
+				if (this.current != e.currentIndex) {
+					this.current = e.currentIndex;
+				}
+			},
+			// 获取商店详情
 			async getShopDetail(id) {
 				let res = await this.$http({
 					url: `/shopdetail`,
@@ -192,6 +266,27 @@
 						url: `/pages/login/index`,
 					})
 				}
+			},
+			// 查看商家资质
+			checkIntelligent() {
+				// todo：
+				uni.showToast({
+					title: 'null'
+				});
+			},
+			// 投诉商家
+			complain() {
+				// todo：
+				uni.showToast({
+					title: '举报成功'
+				});
+			},
+			// 商家电话弹窗回调
+			showDrawer() {
+				// this.$refs.showLeft.open();
+			},
+			closeDrawer() {
+				// this.$refs.showLeft.close();
 			}
 
 		}
@@ -235,6 +330,30 @@
 
 				}
 			}
+		}
+	}
+
+
+
+	/deep/.segmented-control {
+		color: #000 !important;
+		margin: 0 .75rem;
+	}
+
+	/deep/ .segmented-control__item--button--active {
+		color: #000 !important;
+		background-color: #fff !important;
+		background: #fff !important;
+		font-weight: bold;
+	}
+
+	::v-deep .segmented-control__item {
+
+		justify-content: flex-start !important;
+		border-style: none !important;
+
+		&:nth-child(2) {
+			margin: 0 2rem;
 		}
 	}
 
@@ -344,5 +463,29 @@
 				border-radius: 6.25rem;
 			}
 		}
+	}
+
+	.shop-intro {
+		.intelligent-btn {
+			margin: .625rem auto;
+			width: 27.7333vw;
+			height: 7.4667vw;
+			font-size: 3.2vw;
+			line-height: 7.4667vw;
+			text-align: center;
+		}
+
+		.uni-card-3 {
+			view>span {
+				white-space: nowrap;
+				margin-right: .625rem;
+			}
+		}
+	}
+
+
+	.uni-card {
+		padding: 0 !important;
+		margin: 0 .75rem;
 	}
 </style>
