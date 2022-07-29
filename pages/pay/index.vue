@@ -35,7 +35,7 @@
 					<view class="order-item r-flex-2">
 						<view class="r-flex-1">
 							<view class="img-box46 mr10 br10">
-								<img :src="img"  style='border-radius: 5px ;'>
+								<img :src="img" style='border-radius: 5px ;'>
 							</view>
 							<view class="order-name ">
 								<p class="fwbold">{{title}}</p>
@@ -70,13 +70,16 @@
 						</p>
 						<p class="r-flex-2   color-3">
 							<span class="fs10 over">夜间配送，配送费原价上调，另可享配送费活动减免4元</span>
-							<span class=" fs10 text-line-through "><span>￥</span><span>{{(Math.random()*5).toFixed(2)}}</span>
+							<span
+								class=" fs10 text-line-through "><span>￥</span><span>{{(Math.random()*5).toFixed(2)}}</span>
 							</span>
 						</p>
 						<p class="r-flex-2">
 							<view>红包/抵用券</view>
-							<view class='r-flex-1'><view class="fs10 color-3">无可用红包</view><view
-									class="arrow-right ml5"></view></view>
+							<view class='r-flex-1'>
+								<view class="fs10 color-3">无可用红包</view>
+								<view class="arrow-right ml5"></view>
+							</view>
 						</p>
 						<p class="back r-flex-2">
 							<span>下单返豆</span>
@@ -117,29 +120,29 @@
 			return {
 				price: 0,
 				num: 0,
-				img:'',
-				address: '福州软件园大道89号'|| this.$getStorage('token').address ,
-				title:'',
-				reduce:0,
-				shop_img:'',
-				shop_name:'',
+				img: '',
+				address: this.$getStorage('token').address || '福州软件园大道89号',
+				title: '',
+				reduce: 0,
+				shop_img: '',
+				shop_name: '',
 			}
 		},
 		components: {
 			uniCard,
 		},
 		onLoad: function(option) {
-			this.price =Number(option.price)// option.price
+			this.price = Number(option.price) // option.price
 			this.num = option.num
-			this.img=option.img
-			this.shop_img=option.shop_img
-			this.shop_name=option.shop_name
-			this.title=option.title
-			this.reduce=this.price>0?(Math.random()*46).toFixed(2):0
+			this.img = option.img
+			this.shop_img = option.shop_img
+			this.shop_name = option.shop_name
+			this.title = option.title
+			this.reduce = this.price > 0 ? (Math.random() * 46).toFixed(2) : 0
 		},
 		methods: {
 			async pay() {
-				
+
 				if (!this.$getStorage('token')) {
 					uni.navigateTo({
 						url: `/pages/login/index`,
@@ -149,18 +152,19 @@
 				// 	window.location.href='/#/poages/order/index'
 				// 	return
 				// }
-				if ((!this.price&&!this.num&&!this.title&&!this.img&&!this.shop_img&&!this.shop_name&&!this.$getStorage('token').account)) return
-				var res=await this.$http({
-					url:`/pay?title=${this.title}&price=${this.price}&num=${this.num}&img=${this.img}&shop_name=${this.shop_name}&shop_img=${this.shop_img}&token=${this.$getStorage('token').account}`
+				if ((!this.price && !this.num && !this.title && !this.img && !this.shop_img && !this.shop_name && !this
+						.$getStorage('token').account)) return
+				var res = await this.$http({
+					url: `/pay?title=${this.title}&price=${this.price}&num=${this.num}&img=${this.img}&shop_name=${this.shop_name}&shop_img=${this.shop_img}&token=${this.$getStorage('token').account}`
 				})
-				if(res.pay.pay_token){
-					this.$setStorage('pay',res.pay)
+				if (res.pay.pay_token) {
+					this.$setStorage('pay', res.pay)
 					uni.showToast({
 						title: `${res.pay.pay_status}`
 					});
-					setTimeout("window.location.href='/#/pages/order/index'",5000)
+					setTimeout("window.location.href='/#/pages/order/index'", 3000)
 				}
-				
+
 			}
 		}
 	}
@@ -200,5 +204,4 @@
 			border-radius: 1.4375rem;
 		}
 	}
-	
 </style>

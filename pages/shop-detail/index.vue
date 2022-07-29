@@ -359,7 +359,8 @@
 
 
 	.sort-goods {
-		height: calc(100vh - 20.2rem);
+		// 调整全部商品scroll视窗高度
+		height: calc(100vh - 5rem); // max:20.2rem
 
 		.left {
 			width: 200rpx;

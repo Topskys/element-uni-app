@@ -4,88 +4,105 @@
 			<view class="ele">
 				饿了么
 			</view>
-			<view class="tabs r-flex-1 bgc-1">
-				<view class="tab " :class="i==0?'tab-active':''" v-for="tab,i in tabs" :key="i">
-					{{tab.name}}
+
+			<uni-segmented-control :current="current" :values="items" @clickItem="onClickItem" styleType="button"
+				activeColor="#000"></uni-segmented-control>
+			<view class="content">
+				<view v-show="current === 0">
+					<view class="order-item bgc-2 pg10 br10" v-show="order.price!=''">
+						<view class="title r-flex-2">
+							<view class="shop r-flex-1">
+								<view class="shop-img img-box36 mr10">
+									<img :src="order.shop_img" class='br5'>
+								</view>
+								<view class="shop-name over" @click="navTo('/pages/order-detail')">
+									{{order.shop_name}}<i class="fa fa-chevron-right fs14 ml5" style="color: #bbb;"></i>
+								</view>
+							</view>
+							<view class="status fs14" style="color: #999; ">
+								{{order.order_status}}
+							</view>
+						</view>
+						<view class="tip mg5-0">
+							<span class="tip-txt">{{order.rest}}</span>
+						</view>
+						<view class="imgs r-flex-2 mg10-0">
+							<view class="img-list r-flex-1 ">
+								<!-- <view class="img-item img-box56 " v-for="item,i in imgs" :key="i"> -->
+								<img :src="item.img" alt="" v-for="item,i in order.imgs" :key="i" class=" img-box56 br5"
+									:class="l<2?'mr10':''">
+								<!-- </view> -->
+								<span v-if="l<2" class='fs14'>{{order.name}}</span>
+							</view>
+							<view class="price pg0-10" align='center'>
+								<p><span class="fs12">￥</span>{{order.price}}</p>
+								<p class="fs12 color-3 mt5">共{{order.num}}件</p>
+							</view>
+						</view>
+					</view>
+					<view v-show="order.price==''" class="mg10" align='center'>
+						数据出错
+					</view>
+				</view>
+				<view v-show="current === 1" class="mg10" align='center'>
+					暂无数据
+				</view>
+				<view v-show="current === 2" class="mg10" align='center'>
+					暂无数据
+				</view>
+				<view v-show="current === 3" class="mg10" align='center'>
+					暂无数据
 				</view>
 			</view>
 		</view>
 
-		<!-- v-if="$getStorage('token')" -->
-		<view class="order-item bgc-2 pg10 br10" >
-			<view class="title r-flex-2">
-				<view class="shop r-flex-1">
-					<view class="shop-img img-box36 mr10">
-						<img :src="order.shop_img" class='br5'>
-					</view>
-					<view class="shop-name over" @click="navTo('/pages/order-detail')">
-						{{order.shop_name}}<i class="fa fa-chevron-right fs14 ml5" style="color: #bbb;"></i>
-					</view>
-				</view>
-				<view class="status fs14" style="color: #999; ">
-					{{order.order_status}}
-				</view>
-			</view>
-			<view class="tip mg5-0">
-				<span class="tip-txt">{{order.rest}}</span>
-			</view>
-			<view class="imgs r-flex-2 mg10-0">
-				<view class="img-list r-flex-1 ">
-					<!-- <view class="img-item img-box56 " v-for="item,i in imgs" :key="i"> -->
-					<img :src="item.img" alt="" v-for="item,i in order.imgs" :key="i" class=" img-box56 br5" :class="l<2?'mr10':''">
-					<!-- </view> -->
-					<span v-if="l<2" class='fs14'>{{order.name}}</span>
-				</view>
-				<view class="price pg0-10" align='center'>
-					<p><span class="fs12">￥</span>{{order.price}}</p>
-					<p class="fs12 color-3 mt5">共{{order.num}}件</p>
-				</view>
-			</view>
-		</view>
-		
+
+
 	</view>
 </template>
 
 <script>
+	import uniSegmentedControl from '@/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control'
 	export default {
 		data() {
 			return {
-				tabs: [{
-						name: '全部',
-						path: '全部'
-					},
-					{
-						name: '待付款',
-						path: '待付款'
-					},
-					{
-						name: '待评价',
-						path: '待评价'
-					},
-					{
-						name: '退款',
-						path: '退款'
-					}
-				],
+				items: ['全部', '待付款', '待评价', '退款'],
+				current: 0,
 				order: {},
-				l:0,
+				l: 0,
 			}
+		},
+		components: {
+			uniSegmentedControl,
 		},
 		onLoad() {
 			this.$getStorage('token') ? '' : location.href = '/#/pages/login/index'
 			this.getOrder()
 		},
 		methods: {
+			// tab选中的回调
+			onClickItem(e) {
+				if (this.current != e.currentIndex) {
+					this.current = e.currentIndex;
+				}
+			},
 			navTo(url) {
 				uni.navTo(url)
 			},
-			async getOrder(){
-				let res =await this.$http({
-					url:`/order`//?token=${this.$getStorage('token').account }
-				})
-				this.order=res.order
-				this.l=this.order.imgs.length
-			} 
+			async getOrder() {
+				if (this.$getStorage("order") && this.$getStorage("order").price != "") {
+					this.order = this.$getStorage("order")
+					this.l = this.order.imgs.length
+				} else {
+					let res = await this.$http({
+						url: `/order` //?token=${this.$getStorage('token').account }
+					})
+					this.order = res.order
+					this.$setStorage("order", this.order)
+					this.l = this.order.imgs.length
+				}
+
+			}
 		}
 	}
 </script>
@@ -94,33 +111,29 @@
 	.order {
 		height: calc(100vh - 3.9375rem);
 
-		.tabs {
-			padding: 0;
+		/deep/.segmented-control {
+			color: #000 !important;
+			margin: 0 .75rem;
+			background-color: #f5f5f5 !important;
 		}
 
-		.tab {
-			padding-bottom: 0.3125rem;
-			margin: 0.3125rem 0.625rem;
-			position: relative;
-
-			&:first-child {
-				margin-left: 1.625rem;
-			}
-
-			&::after {
-				content: '';
-				width: 100%;
-				height: 3px;
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				border-radius: 2px;
-			}
+		/deep/ .segmented-control__item--button--active {
+			color: #000 !important;
+			background-color: #f5f5f5 !important;
+			font-weight: bold;
 		}
 
-		.tab-active {
-			&::after {
-				background-color: #00a6ff;
+		::v-deep .segmented-control__item {
+
+			justify-content: flex-start !important;
+			border-style: none !important;
+
+			&:nth-child(2) {
+				margin: 0 1rem;
+			}
+
+			&:last-child {
+				margin-left: 1rem;
 			}
 		}
 
@@ -139,7 +152,7 @@
 	}
 
 	.order-item {
-		margin: calc(44px + 2.1875rem) 1rem 1rem 1rem;
+		margin: 0.75rem;
 
 		.tip {
 

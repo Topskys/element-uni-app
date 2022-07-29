@@ -4,6 +4,8 @@
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;;
+	flex-wrap: wrap;
+	
 }
 .r-flex-2{
 	display: flex;
@@ -228,6 +230,9 @@
 }
 .br50{
 	border-radius: 50%;
+}
+.mw265{
+	max-width: 45vw ;
 }
 .mw282{
 	max-width: 75vw ;// 282/375

@@ -6,7 +6,7 @@
 		<view class="account r-flex-2">
 			<view class="left r-flex-1">
 				<view class="avatar mr10">
-					<img :src="avatar" alt="nickname" class="img-1" />
+					<img :src="avatar" class="img-1" />
 				</view>
 
 				<view class="nickname fs18 fw600" v-if="$getStorage('token')">{{$getStorage('token').account}}</view>
@@ -69,17 +69,30 @@
 				]
 			}
 		},
-		// mounted() {
-		// 	window.location.reload()
-		// },
+		activated() {
+
+			this.$getStorage('token') ? location.reload() : ""
+			// setTimeout(() => {
+			// 	this.$getStorage('token') ? location.reload() : ""
+			// }, 2000)
+
+		},
+		onLoad() {
+			if (this.$getStorage('token')) {
+				this.avatar = this.$getStorage('token').avatar
+			}
+		},
 		methods: {
+
+
 			//中间navs跳转页面
 			navTo(url) {
 				uni.navigateTo({
 					url
 				})
 			},
-		}
+
+		},
 	}
 </script>
 

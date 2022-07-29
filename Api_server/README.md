@@ -1,4 +1,11 @@
-### BH_shop_app Api_server
+###  Api_server 简单做的后台数据
+
+#### 运行 server
+```
+npm i
+node app.js
+```
+
 
 
 #### 初始化
@@ -18,10 +25,7 @@ npm i cors@2.8.5
 
 #### 编写server
 
-#### 运行 server
-```
-node app.js
-```
+
 
 #### cd返回上一级目录
 ```

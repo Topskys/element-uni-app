@@ -10,6 +10,7 @@ exports.login = (req, res) => {
 			info:{
 				account: account,
 				nickname:'罗先生',
+				avatar:"https://elm.cangdu.org/img/16f454da7fc62267.jpg",
 				phone:1868086428,
 				address:"福州软件园大道89号2",
 				age:18,
@@ -947,7 +948,7 @@ exports.orderInfo=(req,res)=>{
 				shop_img:shop_img,
 				shop_name:shop_name,
 				token:token,
-				rest:'營業中',
+				rest:'营业中',
 				order_status:"配送中",
 			}
 		})

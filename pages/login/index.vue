@@ -1,7 +1,7 @@
 <template>
 	<view class="login">
 		<view class="number form-item">
-			<input type="text" v-model="user" focus placeholder="请输入手机号">
+			<input type="text" v-model="user" focus placeholder="请输入账号">
 		</view>
 		<view class="verify form-item">
 			<input type="text" v-model="pwd" placeholder="请输入密码" />
@@ -61,7 +61,7 @@
 				// });
 				uni.navigateBack()
 			}
-		}
+		},
 	}
 </script>
 

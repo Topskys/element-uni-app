@@ -76,6 +76,17 @@
 					"key": "NUMBZ-QW4RF-CLQJI-J5A77-XIRM3-26BWY"
 				}
 			}
+		},
+		"https": false,
+		"proxy": {
+			"/local": {
+				"target": "http://pv.sohu.com", // https://api.map.baidu.com
+				"changeOrigin": true,
+				"secure": false,
+				"pathRewrite": {
+					"^/loval": ""
+				}
+			}
 		}
 	}
 }
