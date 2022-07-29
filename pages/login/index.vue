@@ -59,7 +59,8 @@
 				// uni.showToast({
 				// 	title: '登录成功'
 				// });
-				uni.navigateBack()
+				// uni.navigateBack()
+				history.back()
 			}
 		},
 	}

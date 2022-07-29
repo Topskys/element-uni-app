@@ -6,14 +6,14 @@
 		<view class="account r-flex-2">
 			<view class="left r-flex-1">
 				<view class="avatar mr10">
-					<img :src="avatar" class="img-1" />
+					<img :src="$getStorage('token')? $getStorage('token').avatar:avatar" class="img-1" />
 				</view>
 
 				<view class="nickname fs18 fw600" v-if="$getStorage('token')">{{$getStorage('token').account}}</view>
 				<view class="fs18 fw600" v-else @click="navTo('/pages/login/index')">立即登录</view>
 			</view>
 			<view class="right">
-				<button type="default" v-if="$getStorage('token')">账户设置</button>
+				<button type="default" v-show="$getStorage('token')">账户设置</button>
 			</view>
 		</view>
 		<view class="property r-flex-2">
@@ -71,26 +71,23 @@
 		},
 		activated() {
 
-			this.$getStorage('token') ? location.reload() : ""
-			// setTimeout(() => {
-			// 	this.$getStorage('token') ? location.reload() : ""
-			// }, 2000)
-
-		},
-		onLoad() {
-			if (this.$getStorage('token')) {
-				this.avatar = this.$getStorage('token').avatar
-			}
+			// this.$getStorage('token') ? location.reload() : ""
+			this.resetInfo()
 		},
 		methods: {
-
-
-			//中间navs跳转页面
 			navTo(url) {
 				uni.navigateTo({
 					url
 				})
 			},
+			// 切换信息
+			resetInfo() {
+				this.$nextTick(() => {
+					if (this.$getStorage('token').avatar && this.avatar === '/static/logo.png') {
+						this.avatar = this.$getStorage('token').avatar
+					}
+				})
+			}
 
 		},
 	}

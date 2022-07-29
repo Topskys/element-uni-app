@@ -76,7 +76,9 @@
 			uniSegmentedControl,
 		},
 		onLoad() {
-			this.$getStorage('token') ? '' : location.href = '/#/pages/login/index'
+			setTimeout(() => {
+				this.$getStorage('token') ? '' : location.href = '/#/pages/login/index'
+			}, 2000)
 			this.getOrder()
 		},
 		methods: {
@@ -90,17 +92,17 @@
 				uni.navTo(url)
 			},
 			async getOrder() {
-				if (this.$getStorage("order") && this.$getStorage("order").price != "") {
-					this.order = this.$getStorage("order")
-					this.l = this.order.imgs.length
-				} else {
-					let res = await this.$http({
-						url: `/order` //?token=${this.$getStorage('token').account }
-					})
-					this.order = res.order
-					this.$setStorage("order", this.order)
-					this.l = this.order.imgs.length
-				}
+				// if (this.$getStorage("order") && this.$getStorage("order").price != "") {
+				// 	this.order = this.$getStorage("order")
+				// 	this.l = this.order.imgs.length
+				// } else {
+				let res = await this.$http({
+					url: `/order` //?token=${this.$getStorage('token').account }
+				})
+				this.order = res.order
+				this.$setStorage("order", this.order)
+				this.l = this.order.imgs.length
+				// }
 
 			}
 		}
