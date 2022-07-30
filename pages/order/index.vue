@@ -35,7 +35,7 @@
 								<span v-if="l<2" class='fs14'>{{order.name}}</span>
 							</view>
 							<view class="price pg0-10" align='center'>
-								<p><span class="fs12">￥</span>{{order.price}}</p>
+								<p class='fs14'><span class="fs12">￥</span>{{order.price}}</p>
 								<p class="fs12 color-3 mt5">共{{order.num}}件</p>
 							</view>
 						</view>

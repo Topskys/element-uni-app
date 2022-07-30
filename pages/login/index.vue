@@ -45,10 +45,8 @@
 		},
 		methods: {
 			async login() {
-				console.log("login")
 				var res = await this.$http({
 					url: '/login',
-					method: 'GET',
 					data: {
 						user: this.user || 'Topskys',
 						pwd: this.pwd || 'Topskys',

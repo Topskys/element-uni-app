@@ -103,11 +103,13 @@
 				</view>
 			</view>
 		</view>
+		<!-- 评价 -->
 		<view v-show="current === 1">
 			<view class="comment color-15 mg10" align='center'>
 				暂无评价
 			</view>
 		</view>
+		<!-- 商家 -->
 		<view v-show="current === 2">
 			<view class="shop-intro">
 				<uni-card style='pg10'>
@@ -117,15 +119,11 @@
 								<p class="fs14 fwbold  mw282 over color-1">{{shopDetail.name}}</p>
 								<p class='addrres over mw282'>{{shopDetail.address}}</p>
 							</view>
-							<view class="right img-box24 mg12 " @click="showDrawer">
+							<view class="right img-box24 mg12 " @click="open">
 								<img src="/static/contact.png" class=" border-l pg12">
 							</view>
+
 						</view>
-						<uni-drawer ref="showLeft" mode="left" :mask-click="false">
-							<view class="phone mg10 color-1 fs14" align='center' @click="closeDrawer">
-								{{shopDetail.phone}}
-							</view>
-						</uni-drawer>
 					</view>
 					<view class="shop-info">
 						<p class="fs14 fwbold color-1  mg5-0 ">商家信息</p>
@@ -159,6 +157,12 @@
 				<uni-card align='center'>
 					<view class='color-15 fs14' @click="complain">举报商家</view>
 				</uni-card>
+				<!-- 商家手机号弹窗 -->
+				<!-- <uni-popup ref="popup" type="bottom">
+					<view class="phone mg10 color-1 fs14 mg0-auto">
+						<span>{{shopDetail.phone}}</span>
+					</view>
+				</uni-popup> -->
 			</view>
 		</view>
 		</view>
@@ -168,7 +172,7 @@
 <script>
 	import uniCard from '@/uni_modules/uni-card/components/uni-card/uni-card'
 	import uniSegmentedControl from '@/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control'
-	import uniDrawer from '@/uni_modules/uni-drawer/components/uni-drawer/uni-drawer'
+	// import uniPopup from '@/uni_modules/uni-popup/components/uni-popup/uni-popup'
 	export default {
 		data() {
 			return {
@@ -188,7 +192,7 @@
 		components: {
 			uniCard,
 			uniSegmentedControl,
-			uniDrawer,
+			// uniPopup,
 		},
 		onLoad: function(option) {
 			// 接收home的商店id路由参数
@@ -282,11 +286,11 @@
 				});
 			},
 			// 商家电话弹窗回调
-			showDrawer() {
-				// this.$refs.showLeft.open();
-			},
-			closeDrawer() {
-				// this.$refs.showLeft.close();
+			open() {
+				// this.$refs.popup.open() // 传入参数'top'，type失效
+				uni.showToast({
+					title: this.shopDetail.phone
+				})
 			}
 
 		}

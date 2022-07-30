@@ -11,7 +11,7 @@ app.use(express.urlencoded({
 	extended: false
 }))
 
-// 导入 cors 中间件
+// 导入 cors 跨域中间件
 const cors = require('cors')
 // 将 cors 注册为全局中间件
 app.use(cors())
